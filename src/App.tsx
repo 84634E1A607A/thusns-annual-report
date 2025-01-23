@@ -4,6 +4,10 @@ import "fullpage.js/dist/fullpage.css";
 import fullpage from "fullpage.js";
 import Mock from "./Mock.ts";
 
+const roundShadow = (b: number, c: string = "#fff") => {
+  return `${b}px ${b}px ${c}, ${b}px -${b}px ${c}, -${b}px ${b}px ${c}, -${b}px -${b}px ${c}`;
+}
+
 const App = () => {
   // A generic state to store the current page index
   const [currentPage, setCurrentPage] = React.useState(0);
@@ -125,12 +129,11 @@ const App = () => {
           <div
             style={{
               fontSize: "2em",
-              fontWeight: "bold",
               position: "absolute",
               top: "5%",
               left: "7%",
               color: "#415c54",
-              WebkitTextStroke: "1.3px #fff",
+              textShadow: roundShadow(1.5),
             }}
           >
             你在{data.joinYear}年{data.joinSemester}季学期 <br />
@@ -140,13 +143,12 @@ const App = () => {
           <div
             style={{
               fontSize: "1.7em",
-              fontWeight: "bold",
               position: "absolute",
               top: "54%",
               right: "5%",
               textAlign: "right",
               color: "#415c54",
-              WebkitTextStroke: "0.8px #fff",
+              textShadow: roundShadow(1, "#eee"),
             }}
           >
             你加入分队已经有 <br />
@@ -157,12 +159,11 @@ const App = () => {
           <div
             style={{
               fontSize: "2em",
-              fontWeight: "bold",
               position: "absolute",
               bottom: "5%",
               left: "7%",
               color: "#213c34",
-              WebkitTextStroke: "1.3px #fff",
+              textShadow: roundShadow(1),
             }}
           >
             {joinTimeDesc}
@@ -203,10 +204,8 @@ const App = () => {
               left: 0,
               margin: "0 7%",
               fontSize: "1.7em",
-              fontWeight: "bold",
               color: "#415c54",
-              WebkitTextStroke: "1px #fff",
-              textShadow: "2px 2px 5px #fff",
+              textShadow: roundShadow(1, '#eee') + ", 1px 1px 5px #fff",
             }}
           >
             你一共加入了 {data.joinedDepartments.length} 个部门，
@@ -260,9 +259,8 @@ const App = () => {
               left: 0,
               margin: "0 7%",
               fontSize: "2em",
-              fontWeight: "bold",
               color: "#495A4C",
-              WebkitTextStroke: "1.3px #ddd",
+              textShadow: roundShadow(2),
             }}
           >
             你一共参加了 <br /> {data.joinedActivities} 次分队活动
@@ -275,9 +273,8 @@ const App = () => {
               left: 0,
               margin: "0 7%",
               fontSize: "1.7em",
-              fontWeight: "bold",
               color: "#495A4C",
-              WebkitTextStroke: "0.8px #ddd",
+              textShadow: roundShadow(1.5),
               textAlign: "right",
             }}
           >{activityDesc}</div>
