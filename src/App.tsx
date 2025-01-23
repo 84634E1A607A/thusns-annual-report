@@ -55,6 +55,8 @@ const App = () => {
     };
   }, []);
 
+  const [data, setData] = React.useState<object>(Mock());
+
   // This is the stored state for background animations
   const [sec1_clockHandRot, sec1_setClockHandRot] = React.useState(0); // -46 to point to 12 o'clock
 
@@ -65,9 +67,9 @@ const App = () => {
 
   const sec2_lightRot_rt = currentPage === 1 ? sec2_lightRot : -5;
 
-  const [sec3_libraOffset, sec3_setLibraOffset] = React.useState(0);
+  const [sec3_libraOffset, sec3_setLibraOffset] = React.useState(10 * data.joinedActivities);
 
-  const sec3_libraOffset_rt = currentPage === 2 ? sec3_libraOffset : 0;
+  const sec3_libraOffset_rt = currentPage === 2 ? Math.max(-50, Math.min(50, sec3_libraOffset)) : 0;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -80,7 +82,6 @@ const App = () => {
     };
   }, []);
 
-  const [data, setData] = React.useState<object>(Mock());
   // Calulate the time difference between now and the time the user joined the team
   const joinTime = new Date(data.joinYear, data.joinMonth - 1);
   const currentTime = new Date();
