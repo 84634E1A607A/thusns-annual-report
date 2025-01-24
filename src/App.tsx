@@ -17,7 +17,11 @@ const App = () => {
     // @ts-ignore
     new fullpage("#fullpage", {
       autoScrolling: true,
-      afterLoad: (origin: any, destination: { index: number; }, direction: any) => {
+      afterLoad: (
+        origin: any,
+        destination: { index: number },
+        direction: any
+      ) => {
         setCurrentPage(destination.index);
       },
     });
@@ -31,31 +35,44 @@ const App = () => {
   const joinTimeDesc =
     "新鲜血液！欢迎加入分队，跟我们一起打拼吧！才刚起步，未来可期。";
   const departDesc = "专注一个部门，深耕细作，你就是我们团队里的‘一把手’！";
-  const activityDesc = "温暖的分队大家庭，期待你加入更多活动，别让等待成为遗憾。";
+  const activityDesc =
+    "温暖的分队大家庭，期待你加入更多活动，别让等待成为遗憾。";
 
   // --- --- --- From here on: Render --- --- ---
 
   return (
-    <div id="fullpage">
-      <Preface />
-      <JoinStatistics
-        active={currentPage === 1}
-        data={data}
-        joinTimeDesc={joinTimeDesc}
-      />
-      <DepartmentStatistics
-        active={currentPage === 2}
-        data={data}
-        departDesc={departDesc}
-      />
-      <ActivityStatistics
-        active={currentPage === 3}
-        data={data}
-        activityDesc={activityDesc}
-      />
-      <End
-        active={currentPage === 4}
-      ></End>
+    <div
+      style={{
+        backgroundColor: "#222",
+      }}
+    >
+      <div
+        id="fullpage"
+        style={{
+          maxWidth: "calc(100vh * 9 / 16)",
+          width: "100%",
+          height: "100vh",
+          margin: "0 auto",
+        }}
+      >
+        <Preface />
+        <JoinStatistics
+          active={currentPage === 1}
+          data={data}
+          joinTimeDesc={joinTimeDesc}
+        />
+        <DepartmentStatistics
+          active={currentPage === 2}
+          data={data}
+          departDesc={departDesc}
+        />
+        <ActivityStatistics
+          active={currentPage === 3}
+          data={data}
+          activityDesc={activityDesc}
+        />
+        <End active={currentPage === 4} />
+      </div>
     </div>
   );
 };

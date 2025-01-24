@@ -10,7 +10,7 @@ export const roundShadow = (b: number, c: string = "#fff") => {
 // - number[2], the actual transform origin x and y relative to the screen
 export const calculateTransformOrigin = (x: number, y: number, aspectRatio: number) => {
   const imageAspectRatio = aspectRatio;
-  const screenAspectRatio = window.innerHeight / window.innerWidth;
+  const screenAspectRatio = Math.max(window.innerHeight / window.innerWidth, 16 / 9);
 
   if (screenAspectRatio > imageAspectRatio) {
     // Screen is taller than the image, so the edge of the image will touch the top and bottom of the screen
