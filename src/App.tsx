@@ -3,9 +3,11 @@ import "./App.css";
 import "fullpage.js/dist/fullpage.css";
 import fullpage from "fullpage.js";
 import Mock from "./Mock.ts";
+import Preface from "./components/Preface.tsx";
 import JoinStatistics from "./components/JoinStatistics.tsx";
 import DepartmentStatistics from "./components/DepartmentStatistics.tsx";
 import ActivityStatistics from "./components/ActivityStatistics.tsx";
+import End from "./components/End.tsx";
 
 const App = () => {
   // A generic state to store the current page index
@@ -35,21 +37,25 @@ const App = () => {
 
   return (
     <div id="fullpage">
+      <Preface />
       <JoinStatistics
-        active={currentPage === 0}
+        active={currentPage === 1}
         data={data}
         joinTimeDesc={joinTimeDesc}
       />
       <DepartmentStatistics
-        active={currentPage === 1}
+        active={currentPage === 2}
         data={data}
         departDesc={departDesc}
       />
       <ActivityStatistics
-        active={currentPage === 2}
+        active={currentPage === 3}
         data={data}
         activityDesc={activityDesc}
       />
+      <End
+        active={currentPage === 4}
+      ></End>
     </div>
   );
 };
