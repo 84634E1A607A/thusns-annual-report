@@ -4,3 +4,12 @@
   background-position: center;
   overflow: hidden;
 }
+
+.fp-watermark {
+  display: none !important;
+}
+
+.link {
+  color: inherit;
+  text-shadow: none;
+}
