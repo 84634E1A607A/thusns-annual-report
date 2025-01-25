@@ -44,7 +44,7 @@ const LoginButton = () => {
       登 录
     </button>
   );
-}
+};
 
 const Preface = () => {
   const [leaf1Rot, setLeaf1Rot] = React.useState(0);
@@ -155,6 +155,31 @@ const Preface = () => {
         }}
       />
 
+      {/* Tsinghua Logo */}
+      <img
+        src="/image/tsinghua.svg"
+        alt="Tsinghua University"
+        style={{
+          position: "absolute",
+          top: "1%",
+          left: "3%",
+        }}
+      />
+
+      {/* THUSNS Logo */}
+      <img
+        src="/image/SNS_stretched.png"
+        alt="THUSNS"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+        }}
+      />
+
       <div
         style={{
           position: "absolute",
@@ -163,6 +188,7 @@ const Preface = () => {
           right: 0,
           maxWidth: "25em",
           margin: "auto",
+          padding: "0 1em",
           display: "flex",
           flexDirection: "column",
           gap: "1em",
@@ -186,7 +212,15 @@ const Preface = () => {
           年度报告
         </div>
       </div>
-      <div style={{ position: "absolute", bottom: "8%", left: 0, right: 0, textAlign: "center" }}>
+      <div
+        style={{
+          position: "absolute",
+          bottom: "8%",
+          left: 0,
+          right: 0,
+          textAlign: "center",
+        }}
+      >
         <LoginButton />
       </div>
     </div>
