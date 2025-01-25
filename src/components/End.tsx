@@ -1,12 +1,18 @@
 import React, { useEffect } from "react";
 import { roundShadow } from "../utils.ts";
 
-const MixBackground = (props) => {
+interface MixBackgroundProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  opacity?: number;
+}
+
+const MixBackground: React.FC<MixBackgroundProps> = (props) => {
   const opacity = props.opacity === undefined ? 1 : props.opacity;
+  const { opacity: _, alt, ...rest } = props;
 
   return (
     <img
-      {...props}
+      {...rest}
+      alt={alt}
       style={{
         mixBlendMode: "screen",
         position: "absolute",

@@ -47,7 +47,7 @@ const JoinStatistics: React.FC<JoinStatisticsProps> = ({
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [imageAspectRatio]);
 
   const clockHandRot_rt = active ? clockHandRot : -46;
 

@@ -1,17 +1,25 @@
 import React, { useEffect } from "react";
-import { roundShadow, calculateTransformOrigin } from "../utils.ts";
-import { fullpageApi } from "@fullpage/react-fullpage";
+import { calculateTransformOrigin } from "../utils.ts";
 
-const Leaf = (props) => {
+type LeafProps = React.ImgHTMLAttributes<HTMLImageElement> & {
+  originx: number;
+  originy: number;
+  rotate: number;
+};
+
+const Leaf = (props: LeafProps) => {
   const [originX, originY] = calculateTransformOrigin(
     props.originx,
     props.originy,
     2 / 1
   );
 
+  const {originx: _, originy: __, rotate: ___, alt, ...rest} = props;
+
   return (
     <img
-      {...props}
+      {...rest}
+      alt={alt}
       style={{
         position: "absolute",
         top: 0,
