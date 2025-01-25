@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./App.css";
-import "fullpage.js/dist/fullpage.css";
-import fullpage from "fullpage.js";
+import ReactFullpage from "@fullpage/react-fullpage";
 import Mock from "./Mock.ts";
 import Preface from "./components/Preface.tsx";
 import JoinStatistics from "./components/JoinStatistics.tsx";
@@ -11,21 +10,9 @@ import End from "./components/End.tsx";
 
 const App = () => {
   // A generic state to store the current page index
+  const [currentSection, setCurrentSection] = React.useState(0);
   const [currentPage, setCurrentPage] = React.useState(0);
-
-  useEffect(() => {
-    // @ts-ignore
-    new fullpage("#fullpage", {
-      autoScrolling: true,
-      afterLoad: (
-        origin: any,
-        destination: { index: number },
-        direction: any
-      ) => {
-        setCurrentPage(destination.index);
-      },
-    });
-  }, []);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   // --- --- --- From here on: Data acquisition and description --- --- ---
 
@@ -43,36 +30,65 @@ const App = () => {
   return (
     <div
       style={{
-        backgroundColor: "#222",
+        maxWidth: "calc(100vh * 9 / 16)",
+        width: "100vh",
+        height: "100vh",
+        margin: "0 auto",
       }}
     >
-      <div
-        id="fullpage"
-        style={{
-          maxWidth: "calc(100vh * 9 / 16)",
-          width: "100%",
-          height: "100vh",
-          margin: "0 auto",
+      <ReactFullpage
+        licenseKey=""
+        onLeave={(origin, destination, direction) => {
+          if (!loggedIn) return false;
+
+          let prevent = false;
+          if (direction === "down") {
+            if ([1].includes(currentPage)) {
+              prevent = true;
+            }
+          }
+          else {
+            if ([2].includes(currentPage)) {
+              prevent = true;
+            }
+          }
+
+          console.log(origin.index, destination.index, direction, currentPage, prevent);
+          setCurrentPage((prev) => {
+            return direction === "down" ? prev + 1 : prev - 1;
+          });
+
+          return !prevent;
         }}
-      >
-        <Preface />
-        <JoinStatistics
-          active={currentPage === 1}
-          data={data}
-          joinTimeDesc={joinTimeDesc}
-        />
-        <DepartmentStatistics
-          active={currentPage === 2}
-          data={data}
-          departDesc={departDesc}
-        />
-        <ActivityStatistics
-          active={currentPage === 3}
-          data={data}
-          activityDesc={activityDesc}
-        />
-        <End active={currentPage === 4} />
-      </div>
+        afterLoad={(origin, destination, direction) => {
+          setCurrentSection(destination.index);
+        }}
+        credits={{ enabled: true }}
+        render={({ state, fullpageApi }) => {
+          return (
+            <ReactFullpage.Wrapper>
+              <Preface onLogin={() => setLoggedIn(true)} />
+              <JoinStatistics
+                active={currentSection === 1}
+                subpage={currentPage - 1}
+                data={data}
+                joinTimeDesc={joinTimeDesc}
+              />
+              <DepartmentStatistics
+                active={currentSection === 2}
+                data={data}
+                departDesc={departDesc}
+              />
+              <ActivityStatistics
+                active={currentSection === 3}
+                data={data}
+                activityDesc={activityDesc}
+              />
+              <End active={currentSection === 4} />
+            </ReactFullpage.Wrapper>
+          );
+        }}
+      />
     </div>
   );
 };

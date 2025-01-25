@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@fullpage/react-fullpage": "^0.1.47",
     "cra-template": "1.2.0",
-    "fullpage.js": "^4.0.32",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-fullpage": "^0.1.19",

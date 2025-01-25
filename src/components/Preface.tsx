@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { roundShadow, calculateTransformOrigin } from "../utils.ts";
+import { fullpageApi } from "@fullpage/react-fullpage";
 
 const Leaf = (props) => {
   const [originX, originY] = calculateTransformOrigin(
@@ -27,9 +28,10 @@ const Leaf = (props) => {
   );
 };
 
-const LoginButton = () => {
+const LoginButton = (props: React.JSX.IntrinsicAttributes & React.ClassAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <button
+      {...props}
       style={{
         padding: "0.3em 1em",
         fontSize: "2em",
@@ -46,7 +48,7 @@ const LoginButton = () => {
   );
 };
 
-const Preface = () => {
+const Preface = ({onLogin}) => {
   const [leaf1Rot, setLeaf1Rot] = React.useState(0);
   const [leaf2Rot, setLeaf2Rot] = React.useState(0);
   const [leaf3Rot, setLeaf3Rot] = React.useState(0);
@@ -221,7 +223,11 @@ const Preface = () => {
           textAlign: "center",
         }}
       >
-        <LoginButton />
+        <LoginButton
+          onClick={() => {
+            onLogin();
+          }}
+         />
       </div>
     </div>
   );

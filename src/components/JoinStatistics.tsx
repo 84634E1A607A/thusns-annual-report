@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { roundShadow, calculateTransformOrigin } from "../utils.ts";
 
-const JoinStatistics = ({
+interface JoinStatisticsProps {
+  active: boolean;
+  subpage: number;
+  data: any;
+  joinTimeDesc: string;
+}
+
+const JoinStatistics: React.FC<JoinStatisticsProps> = ({
   active,
+  subpage,
   data,
   joinTimeDesc,
 }) => {
@@ -29,7 +37,9 @@ const JoinStatistics = ({
 
   useEffect(() => {
     const handleResize = () => {
-      setClockHandRotOrigin(calculateTransformOrigin(0.66, 0.386, imageAspectRatio));
+      setClockHandRotOrigin(
+        calculateTransformOrigin(0.66, 0.386, imageAspectRatio)
+      );
     };
 
     window.addEventListener("resize", handleResize);
@@ -67,7 +77,14 @@ const JoinStatistics = ({
         }}
       />
 
-      <div>
+      <div
+        style={{
+          position: "absolute",
+          top: 0, left: 0, width: "100%", height: "100%",
+          opacity: subpage <= 0 ? 1 : 0,
+          transition: "opacity 0.8s",
+        }}
+      >
         <div
           style={{
             fontSize: "2em",
@@ -76,6 +93,10 @@ const JoinStatistics = ({
             left: "7%",
             color: "#415c54",
             textShadow: roundShadow(1.5),
+            transformStyle: "preserve-3d",
+            transform: subpage <= 0 ? "rotateX(0deg)" : "rotateX(90deg)",
+            transformOrigin: "50% 50% -1.5em",
+            transition: "transform 1s",
           }}
         >
           你在{data.joinYear}年{data.joinSemester}季学期 <br />
@@ -91,6 +112,10 @@ const JoinStatistics = ({
             textAlign: "right",
             color: "#415c54",
             textShadow: roundShadow(1, "#eee"),
+            transformStyle: "preserve-3d",
+            transform: subpage <= 0 ? "rotateX(0deg)" : "rotateX(90deg)",
+            transformOrigin: "50% 50% -1.5em",
+            transition: "transform 1s",
           }}
         >
           你加入分队已经有 <br />
@@ -106,9 +131,37 @@ const JoinStatistics = ({
             left: "7%",
             color: "#213c34",
             textShadow: roundShadow(1),
+            transformStyle: "preserve-3d",
+            transform: subpage <= 0 ? "rotateX(0deg)" : "rotateX(90deg)",
+            transformOrigin: "50% 50% -1.5em",
+            transition: "transform 1s",
           }}
         >
           {joinTimeDesc}
+        </div>
+      </div>
+
+      <div
+        style={{
+          opacity: subpage >= 1 ? 1 : 0,
+          transition: "opacity 0.8s",
+        }}
+      >
+        <div
+          style={{
+            fontSize: "2em",
+            position: "absolute",
+            top: "5%",
+            left: "7%",
+            color: "#415c54",
+            textShadow: roundShadow(1.5),
+            transformStyle: "preserve-3d",
+            transform: subpage >= 1 ? "rotateX(0deg)" : "rotateX(-90deg)",
+            transformOrigin: "50% 50% -1.5em",
+            transition: "transform 1s",
+          }}
+        >
+          Subpage 2
         </div>
       </div>
     </div>
