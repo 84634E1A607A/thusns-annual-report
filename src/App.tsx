@@ -13,6 +13,7 @@ const App = () => {
   const [currentSection, setCurrentSection] = React.useState(0);
   const [currentPage, setCurrentPage] = React.useState(0);
   const [loggedIn, setLoggedIn] = React.useState(false);
+  const [switchingSubpage, setSwitchingSubpage] = React.useState(false);
 
   // --- --- --- From here on: Data acquisition and description --- --- ---
 
@@ -31,7 +32,7 @@ const App = () => {
     <div
       style={{
         maxWidth: "calc(100vh * 9 / 16)",
-        width: "100vh",
+        width: "100%",
         height: "100vh",
         margin: "0 auto",
       }}
@@ -40,23 +41,29 @@ const App = () => {
         licenseKey=""
         onLeave={(origin, destination, direction) => {
           if (!loggedIn) return false;
+          if (switchingSubpage) return false;
 
           let prevent = false;
           if (direction === "down") {
             if ([1].includes(currentPage)) {
               prevent = true;
             }
-          }
-          else {
+          } else {
             if ([2].includes(currentPage)) {
               prevent = true;
             }
           }
 
-          console.log(origin.index, destination.index, direction, currentPage, prevent);
           setCurrentPage((prev) => {
             return direction === "down" ? prev + 1 : prev - 1;
           });
+
+          if (prevent) {
+            setSwitchingSubpage(true);
+            setTimeout(() => {
+              setSwitchingSubpage(false);
+            }, 1000);
+          }
 
           return !prevent;
         }}
