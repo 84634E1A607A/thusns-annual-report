@@ -21,7 +21,7 @@ const DepartmentStatistics = ({ active, data, departDesc }) => {
     <div
       className="section"
       style={{
-        backgroundImage: "url(/image/part2_background.png)",
+        backgroundImage: "url(/image/part2_background.jpg)",
         position: "relative",
       }}
     >

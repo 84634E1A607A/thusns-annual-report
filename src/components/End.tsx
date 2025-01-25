@@ -38,7 +38,7 @@ const End = ({ active }) => {
     <div
       className="section"
       style={{
-        backgroundImage: "url(/image/end_background.png)",
+        backgroundImage: "url(/image/end_background.jpg)",
         position: "relative",
       }}
     >

@@ -3,8 +3,8 @@ import { roundShadow, calculateTransformOrigin } from "../utils.ts";
 
 const Leaf = (props) => {
   const [originX, originY] = calculateTransformOrigin(
-    props.originX,
-    props.originY,
+    props.originx,
+    props.originy,
     2 / 1
   );
 
@@ -109,7 +109,7 @@ const Preface = () => {
     <div
       className="section active"
       style={{
-        backgroundImage: "url(/image/index_background.png)",
+        backgroundImage: "url(/image/index_background.jpg)",
         position: "relative",
       }}
     >
@@ -117,8 +117,8 @@ const Preface = () => {
       <Leaf
         src="/image/index_leaf2.png"
         alt="Leaf 2"
-        originX={0.2}
-        originY={0.9335}
+        originx={0.2}
+        originy={0.9335}
         rotate={leaf2Rot}
       />
 
@@ -126,8 +126,8 @@ const Preface = () => {
       <Leaf
         src="/image/index_leaf1.png"
         alt="Leaf 1"
-        originX={-0.03}
-        originY={0.822}
+        originx={-0.03}
+        originy={0.822}
         rotate={leaf1Rot}
         style={{
           left: "-2%",
@@ -138,8 +138,8 @@ const Preface = () => {
       <Leaf
         src="/image/index_leaf3.png"
         alt="Leaf 3"
-        originX={0.1}
-        originY={1.05}
+        originx={0.1}
+        originy={1.05}
         rotate={leaf3Rot}
       />
 
@@ -147,8 +147,8 @@ const Preface = () => {
       <Leaf
         src="/image/index_leaf4.png"
         alt="Leaf 4"
-        originX={-0.3}
-        originY={0.8}
+        originx={-0.3}
+        originy={0.8}
         rotate={leaf4Rot}
         style={{
           left: "-3%",

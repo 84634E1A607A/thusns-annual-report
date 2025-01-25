@@ -45,7 +45,7 @@ const JoinStatistics = ({
     <div
       className="section"
       style={{
-        backgroundImage: "url(/image/part1_background.png)",
+        backgroundImage: "url(/image/part1_background.jpg)",
         position: "relative",
       }}
     >

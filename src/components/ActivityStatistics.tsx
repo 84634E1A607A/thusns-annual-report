@@ -14,7 +14,7 @@ const ActivityStatistics = ({ active, data, activityDesc }) => {
     <div
       className="section"
       style={{
-        backgroundImage: "url(/image/part3_background.png)",
+        backgroundImage: "url(/image/part3_background.jpg)",
         position: "relative",
       }}
     >
