@@ -29,6 +29,7 @@ const DepartmentStatistics = ({ active, data, departDesc }) => {
         src="/image/part2_light.png"
         alt="Light"
         style={{
+          mixBlendMode: "soft-light",
           transform: `rotate(${lightRot_rt}deg)`,
           transition: "transform 3s",
           position: "absolute",
