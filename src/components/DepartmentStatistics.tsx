@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { roundShadow } from "../utils.ts";
 
-const DepartmentStatistics = ({ active, data, departDesc }) => {
+const DepartmentStatistics = ({ active, data }) => {
   const [lightRot, setLightRot] = useState(0);
 
   useEffect(() => {
@@ -16,6 +16,15 @@ const DepartmentStatistics = ({ active, data, departDesc }) => {
   }, []);
 
   const lightRot_rt = active ? lightRot : -5;
+
+  const departDesc =
+    data.joinedDepartments.length == 0
+      ? "咦？你还没加入任何部门？代码出错了吗？"
+      : data.joinedDepartments.length == 1
+      ? "专注一个部门，深耕细作，你就是我们团队里的‘一把手’！"
+      : data.joinedDepartments.length == 2
+      ? "手忙脚乱？不，是你太能干！已经同时掌握了两个部门的关键。"
+      : "部门大管家！分队里的‘万金油’，无论在哪个岗位都能轻松驾驭。";
 
   return (
     <div
@@ -51,7 +60,7 @@ const DepartmentStatistics = ({ active, data, departDesc }) => {
             margin: "0 7%",
             fontSize: "1.7em",
             color: "#415c54",
-            textShadow: roundShadow(1, '#eee') + ", 1px 1px 5px #fff",
+            textShadow: roundShadow(1, "#eee") + ", 1px 1px 5px #fff",
           }}
         >
           你一共加入了 {data.joinedDepartments.length} 个部门，

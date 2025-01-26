@@ -19,13 +19,6 @@ const App = () => {
 
   const [data, setData] = React.useState<object>(Mock());
 
-  // TODO
-  const joinTimeDesc =
-    "新鲜血液！欢迎加入分队，跟我们一起打拼吧！才刚起步，未来可期。";
-  const departDesc = "专注一个部门，深耕细作，你就是我们团队里的‘一把手’！";
-  const activityDesc =
-    "温暖的分队大家庭，期待你加入更多活动，别让等待成为遗憾。";
-
   // --- --- --- From here on: Render --- --- ---
 
   return (
@@ -45,11 +38,19 @@ const App = () => {
 
           let prevent = false;
           if (direction === "down") {
-            if ([1].includes(currentPage)) {
+            if ([1, 2].includes(currentPage)) {
+              prevent = true;
+            }
+
+            if ([5].includes(currentPage)) {
               prevent = true;
             }
           } else {
-            if ([2].includes(currentPage)) {
+            if ([2, 3].includes(currentPage)) {
+              prevent = true;
+            }
+
+            if ([6].includes(currentPage)) {
               prevent = true;
             }
           }
@@ -74,23 +75,26 @@ const App = () => {
         render={({ state, fullpageApi }) => {
           return (
             <ReactFullpage.Wrapper>
+              {/* Subpage 0 */}
               <Preface onLogin={() => setLoggedIn(true)} />
+              {/* Subpage 1-3 */}
               <JoinStatistics
                 active={currentSection === 1}
                 subpage={currentPage - 1}
                 data={data}
-                joinTimeDesc={joinTimeDesc}
               />
+              {/* Subpage 4 */}
               <DepartmentStatistics
                 active={currentSection === 2}
                 data={data}
-                departDesc={departDesc}
               />
+              {/* Subpage 5-6 */}
               <ActivityStatistics
                 active={currentSection === 3}
+                subpage={currentPage - 5}
                 data={data}
-                activityDesc={activityDesc}
               />
+              {/* Subpage 7 */}
               <End active={currentSection === 4} />
             </ReactFullpage.Wrapper>
           );
