@@ -7,6 +7,8 @@ import JoinStatistics from "./components/JoinStatistics.tsx";
 import DepartmentStatistics from "./components/DepartmentStatistics.tsx";
 import ActivityStatistics from "./components/ActivityStatistics.tsx";
 import End from "./components/End.tsx";
+import keycloak from "./keycloak.js";
+import { useEffect } from "react";
 
 const App = () => {
   // A generic state to store the current page index
@@ -15,6 +17,13 @@ const App = () => {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [switchingSubpage, setSwitchingSubpage] = React.useState(false);
 
+  // --- --- --- From here on: Keycloak --- --- ---
+
+  useEffect(() => {
+    keycloak.onAuthSuccess = () => {
+      keycloak.loadUserInfo().then(() => setLoggedIn(true));
+    };
+  });
   // --- --- --- From here on: Data acquisition and description --- --- ---
 
   const [data, setData] = React.useState<object>(Mock());
@@ -76,7 +85,9 @@ const App = () => {
           return (
             <ReactFullpage.Wrapper>
               {/* Subpage 0 */}
-              <Preface onLogin={() => setLoggedIn(true)} />
+              <Preface onLogin={() => {
+                keycloak.login();
+              }} userName={loggedIn ? (keycloak.userInfo as any).name : undefined} />
               {/* Subpage 1-3 */}
               <JoinStatistics
                 active={currentSection === 1}
@@ -84,10 +95,7 @@ const App = () => {
                 data={data}
               />
               {/* Subpage 4 */}
-              <DepartmentStatistics
-                active={currentSection === 2}
-                data={data}
-              />
+              <DepartmentStatistics active={currentSection === 2} data={data} />
               {/* Subpage 5-6 */}
               <ActivityStatistics
                 active={currentSection === 3}

@@ -14,7 +14,7 @@ const Leaf = (props: LeafProps) => {
     2 / 1
   );
 
-  const {originx: _, originy: __, rotate: ___, alt, ...rest} = props;
+  const { originx: _, originy: __, rotate: ___, alt, ...rest } = props;
 
   return (
     <img
@@ -36,7 +36,11 @@ const Leaf = (props: LeafProps) => {
   );
 };
 
-const LoginButton = (props: React.JSX.IntrinsicAttributes & React.ClassAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement>) => {
+const LoginButton = (
+  props: React.JSX.IntrinsicAttributes &
+    React.ClassAttributes<HTMLButtonElement> &
+    React.ButtonHTMLAttributes<HTMLButtonElement>
+) => {
   return (
     <button
       {...props}
@@ -56,7 +60,7 @@ const LoginButton = (props: React.JSX.IntrinsicAttributes & React.ClassAttribute
   );
 };
 
-const Preface = ({onLogin}) => {
+const Preface = ({ onLogin, userName }) => {
   const [leaf1Rot, setLeaf1Rot] = React.useState(0);
   const [leaf2Rot, setLeaf2Rot] = React.useState(0);
   const [leaf3Rot, setLeaf3Rot] = React.useState(0);
@@ -231,11 +235,22 @@ const Preface = ({onLogin}) => {
           textAlign: "center",
         }}
       >
-        <LoginButton
-          onClick={() => {
-            onLogin();
-          }}
-         />
+        {userName !== undefined ? (
+          <div
+            style={{
+              fontSize: "2em",
+              color: "#415c54",
+            }}
+          >
+            欢迎，{userName}！
+          </div>
+        ) : (
+          <LoginButton
+            onClick={() => {
+              onLogin();
+            }}
+          />
+        )}
       </div>
     </div>
   );
