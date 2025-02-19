@@ -21,12 +21,25 @@ const App = () => {
 
   useEffect(() => {
     keycloak.onAuthSuccess = () => {
-      keycloak.loadUserInfo().then(() => setLoggedIn(true));
+      keycloak.loadUserProfile().then(() => setLoggedIn(true));
     };
   });
   // --- --- --- From here on: Data acquisition and description --- --- ---
 
   const [data, setData] = React.useState<object>(Mock());
+  useEffect(() => {
+    if (!loggedIn) return;
+
+    fetch("https://example-backend-bla-bla-bla.thusns.net/data", {
+      headers: {
+        Authorization: `Bearer ${keycloak.token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+      });
+  }, [loggedIn]);
 
   // --- --- --- From here on: Render --- --- ---
 
@@ -85,9 +98,16 @@ const App = () => {
           return (
             <ReactFullpage.Wrapper>
               {/* Subpage 0 */}
-              <Preface onLogin={() => {
-                keycloak.login();
-              }} userName={loggedIn ? (keycloak.userInfo as any).name : undefined} />
+              <Preface
+                onLogin={() => {
+                  keycloak.login();
+                }}
+                userName={
+                  loggedIn
+                    ? keycloak.profile!.lastName! + keycloak.profile!.firstName!
+                    : undefined
+                }
+              />
               {/* Subpage 1-3 */}
               <JoinStatistics
                 active={currentSection === 1}

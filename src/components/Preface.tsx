@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { calculateTransformOrigin } from "../utils.ts";
+import { calculateTransformOrigin, roundShadow } from "../utils.ts";
 
 type LeafProps = React.ImgHTMLAttributes<HTMLImageElement> & {
   originx: number;
@@ -240,9 +240,10 @@ const Preface = ({ onLogin, userName }) => {
             style={{
               fontSize: "2em",
               color: "#415c54",
+              textShadow: roundShadow(1),
             }}
           >
-            欢迎，{userName}！
+            欢迎您，{userName}！
           </div>
         ) : (
           <LoginButton

@@ -5,7 +5,7 @@ import Keycloak from "keycloak-js";
 const keycloak = new Keycloak({
   url: "https://sso.thusns.net",
   realm: "SNS",
-  clientId: "SNS-realm",
+  clientId: "thusns-annual-report",
 });
 
 export default keycloak;
